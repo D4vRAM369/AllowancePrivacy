@@ -220,8 +220,8 @@ class AboutPage extends StatelessWidget {
               const SizedBox(height: 10),
               const AboutInfoBox(
                 title: "Allowance Privacy by D4vRAM369",
-                link: "https://github.com/D4vRAM369",
-                displayLink: "github.com/D4vRAM369",
+                link: "https://github.com/D4vRAM369/AllowancePrivacy",
+                displayLink: "github.com/D4vRAM369/AllowancePrivacy",
               ),
               const AboutInfoBox(
                 title: "Based on Allowance by James Kokoska",
