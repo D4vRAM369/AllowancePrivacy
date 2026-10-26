@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Financial data and sealed key material leave the app only through explicit exports. -->
-<data-extraction-rules>
+<!-- tools:ignore: AGP 7.3 lint predates the device_* domains (valid since API 31,
+     device-protected storage); keeping them excludes that storage too. -->
+<data-extraction-rules xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="FullBackupContent">
     <cloud-backup>
         <exclude domain="root" path="."/>
         <exclude domain="file" path="."/>

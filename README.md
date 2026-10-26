@@ -1,3 +1,48 @@
+# Allowance Privacy
+
+Fork Android de [Allowance](https://github.com/jameskokoska/Allowance) centrado en proteger tu información financiera. Se instala junto a la app original (`dev.d4vram.allowanceenhanced`) y conserva todas sus funciones de presupuesto. Origen, cambios y licencia: [FORK_NOTICE.md](FORK_NOTICE.md) (GPL-3.0).
+
+**Fork creado y mantenido por [D4vRAM369](https://github.com/D4vRAM369)**, sobre el trabajo original de [James Kokoska](https://github.com/jameskokoska) y colaboradores de Allowance. Contacto: [d4vram369@proton.me](mailto:d4vram369@proton.me) · [Telegram](https://t.me/D4vRAM369).
+
+[![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=D4vRAM369&button_colour=5F7FFF&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/D4vRAM369)
+
+Si te gusta la base, apoya también al autor original: [ko-fi.com/dapperappdeveloper](https://ko-fi.com/dapperappdeveloper).
+
+## Qué añade
+
+- **Bloqueo de la app:** PIN de 6–8 dígitos (solo se guarda un hash Argon2id), huella del sistema y bloqueo automático al salir (inmediato, 30 s, 1 min o 5 min). Espera creciente tras 5 fallos.
+- **Ocultar importes:** botón de ojo en la pantalla principal y ajuste para mostrar `••••` al abrir. Los cálculos y la base de datos no cambian.
+- **Pantalla protegida:** miniatura oculta en apps recientes (Android 13+, activo por defecto) y bloqueo opcional de capturas (FLAG_SECURE).
+- **Sin red:** la versión release no tiene permiso `INTERNET` ni telemetría. Se retiraron compras, reseñas y promociones heredadas.
+- **Tus datos, en tus archivos:** CSV de movimientos, backup completo cifrado con contraseña (AES-256-GCM + Argon2id) y AutoBackup cifrado a la carpeta que elijas. Excluido del backup en la nube de Android.
+- **Editar descripciones** de movimientos sin tocar importes ni fechas.
+
+Todo está en Ajustes → *Privacidad y seguridad* y *Copias y datos*.
+
+## Límites conocidos
+
+- La base de datos local no está cifrada: el bloqueo protege contra quien coge el móvil desbloqueado, no contra un dispositivo con root.
+- Si olvidas el PIN y no tienes la huella activada, no hay recuperación: solo tus copias de seguridad. Si pierdes la contraseña de una copia, no se puede descifrar.
+- Una huella nueva añadida al sistema también desbloquea la app.
+
+## Compilar
+
+Flutter 3.19.6 (Dart 3.3.4), Android SDK 34 y JDK 17.
+
+```bash
+cd budget_simple
+flutter pub get
+flutter test
+cd android
+JAVA_HOME=/ruta/al/jdk17 ./gradlew assembleDebug
+```
+
+`flutter build` puede elegir el JDK de Android Studio, incompatible con Gradle 7.5; por eso se usa `gradlew` con JDK 17. Para release, crea tu propio `android/key.properties` y keystore (ignorados por Git).
+
+El README original de Allowance sigue a continuación; sus enlaces y capturas pertenecen al proyecto original.
+
+---
+
 <h1 align="center" style="font-size:28px; line-height:1"><b>Allowance</b></h1>
 
 <a href="https://allowance-track.web.app/">

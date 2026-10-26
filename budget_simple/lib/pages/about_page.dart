@@ -68,6 +68,40 @@ class AboutPage extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               SettingsContainer(
+                title: "Allowance Privacy · fork de D4vRAM369",
+                afterWidget: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 17,
+                ),
+                icon: Icons.person_outline,
+                onTap: () {
+                  openUrl("https://github.com/D4vRAM369");
+                },
+              ),
+              SettingsContainer(
+                title: "Invítame a un café",
+                afterWidget: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 17,
+                ),
+                icon: Icons.coffee_outlined,
+                onTap: () {
+                  // Opens the browser; the app itself has no network access.
+                  openUrl("https://www.buymeacoffee.com/D4vRAM369");
+                },
+              ),
+              SettingsContainer(
+                title: "Apoya al autor original",
+                afterWidget: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 17,
+                ),
+                icon: Icons.favorite_outline,
+                onTap: () {
+                  openUrl("https://ko-fi.com/dapperappdeveloper");
+                },
+              ),
+              SettingsContainer(
                 title: "Allowance is Open Source!",
                 afterWidget: const Icon(
                   Icons.arrow_forward_ios_rounded,
@@ -185,6 +219,16 @@ class AboutPage extends StatelessWidget {
               const Divider(),
               const SizedBox(height: 10),
               const AboutInfoBox(
+                title: "Allowance Privacy by D4vRAM369",
+                link: "https://github.com/D4vRAM369",
+                displayLink: "github.com/D4vRAM369",
+              ),
+              const AboutInfoBox(
+                title: "Based on Allowance by James Kokoska",
+                link: "https://github.com/jameskokoska/Allowance",
+                displayLink: "github.com/jameskokoska/Allowance",
+              ),
+              const AboutInfoBox(
                 title: "App Inspired by Alex Dovhyi",
                 link:
                     "https://dribbble.com/shots/20474761-Simple-budgeting-app",
@@ -221,8 +265,13 @@ class AboutPage extends StatelessWidget {
               ),
               const AboutInfoBox(
                 title: "Contact",
-                displayLink: "dapperappdeveloper@gmail.com",
-                link: "mailto:dapperappdeveloper@gmail.com",
+                displayLink: "d4vram369@proton.me",
+                link: "mailto:d4vram369@proton.me",
+              ),
+              const AboutInfoBox(
+                title: "Telegram",
+                displayLink: "t.me/D4vRAM369",
+                link: "https://t.me/D4vRAM369",
               ),
               const SizedBox(height: 10),
               Row(
