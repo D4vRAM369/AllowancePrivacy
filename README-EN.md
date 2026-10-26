@@ -27,6 +27,10 @@ Signed APK on the [Releases](https://github.com/D4vRAM369/AllowancePrivacy/relea
 
 Everything is in Settings → *Privacidad y seguridad* and *Copias y datos*. Privacy policy: [PRIVACY.md](PRIVACY.md).
 
+## Why not Cashew?
+
+The same developer has a much more polished and complete app called [Cashew](https://github.com/jameskokoska/Cashew). It's an amazing app that I've paid a monthly subscription for and recommend, but I like Allowance's minimalism; I just missed privacy options in it.
+
 ## Known limits
 
 - The local database is not encrypted: the lock protects against someone holding your unlocked phone, not against a rooted device.

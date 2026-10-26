@@ -27,6 +27,10 @@ APK firmado en [Releases](https://github.com/D4vRAM369/AllowancePrivacy/releases
 
 Todo está en Ajustes → *Privacidad y seguridad* y *Copias y datos*. Política de privacidad: [PRIVACY.md](PRIVACY.md).
 
+## ¿Y por qué no Cashew?
+
+Esta aplicación tiene una versión mucho más trabajada y completa del mismo desarrollador, llamada [Cashew](https://github.com/jameskokoska/Cashew), y es una app increíble por la cual he pagado suscripción mensual y recomiendo, pero me gusta el minimalismo de Allowance, solo que echaba en falta opciones de privacidad en esta.
+
 ## Límites conocidos
 
 - La base de datos local no está cifrada: el bloqueo protege contra quien coge el móvil desbloqueado, no contra un dispositivo con root.
