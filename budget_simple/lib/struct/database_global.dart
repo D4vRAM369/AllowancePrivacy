@@ -22,3 +22,8 @@ late bool dismissedPopupDoneOver;
 late int numberLogins;
 late bool hasOnboarded;
 late Map<String, dynamic> dataSetTranslationsApp;
+
+/// Privacy mode: only what is drawn changes; maths and the database keep the
+/// real values. InitializeApp rebuilds everything when it flips.
+final amountsHidden = ValueNotifier<bool>(false);
+const hideAmountsKey = 'hideAmounts';

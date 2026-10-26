@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:budget_simple/security/app_lock.dart';
 import 'package:budget_simple/security/pin_pad.dart';
+import 'package:budget_simple/struct/database_global.dart';
 
 Future<bool> deviceBiometric() async {
   try {
@@ -54,7 +55,13 @@ class _LockGateState extends State<LockGate> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (authenticating || ownSheetOpen || !widget.lock.enabled) return;
+    if (authenticating || ownSheetOpen) return;
+    // Privacy mode re-engages every time the user really leaves the app.
+    if (state == AppLifecycleState.paused &&
+        (widget.lock.prefs.getBool(hideAmountsKey) ?? false)) {
+      amountsHidden.value = true;
+    }
+    if (!widget.lock.enabled) return;
     if (state == AppLifecycleState.hidden || state == AppLifecycleState.paused) {
       hiddenAt ??= widget.lock.clock();
       // Immediate lock is applied before leaving, so resume never shows data.

@@ -40,6 +40,11 @@ String getDecimalSeparator() {
       ".";
 }
 
+/// Single entry point for showing money, so privacy mode can't be bypassed.
+String formatAmount(double amount, {int? decimals}) => amountsHidden.value
+    ? '••••'
+    : getNumberFormat(decimals: decimals).format(amount);
+
 NumberFormat getNumberFormat({int? decimals}) {
   return NumberFormat.currency(
     decimalDigits: decimals ?? 2,

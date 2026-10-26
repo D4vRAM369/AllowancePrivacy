@@ -94,6 +94,7 @@ setSettings() async {
   numberLogins = sharedPreferences.getInt("numberLogins2") ?? 0;
   sharedPreferences.setInt("numberLogins2", numberLogins + 1);
   hasOnboarded = sharedPreferences.getBool("hasOnboarded") ?? false;
+  amountsHidden.value = sharedPreferences.getBool(hideAmountsKey) ?? false;
   // print(numberLogins);
   if (!kIsWeb) {
     if (numberLogins == 6 || numberLogins == 15 || numberLogins == 25) {
@@ -114,6 +115,18 @@ class InitializeApp extends StatefulWidget {
 }
 
 class _InitializeAppState extends State<InitializeApp> {
+  @override
+  void initState() {
+    super.initState();
+    amountsHidden.addListener(refreshAppState);
+  }
+
+  @override
+  void dispose() {
+    amountsHidden.removeListener(refreshAppState);
+    super.dispose();
+  }
+
   void refreshAppState() {
     setState(() {});
     // print("Rebuilt");

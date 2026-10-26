@@ -5,7 +5,6 @@ import 'package:budget_simple/struct/functions.dart';
 import 'package:budget_simple/struct/translations.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart' hide Table;
-import 'package:intl/intl.dart';
 
 export 'platform/shared.dart';
 part 'tables.g.dart';
@@ -115,12 +114,11 @@ class TransactionsDatabase extends _$TransactionsDatabase {
   }
 
   Future<int> deleteTransaction(id, {BuildContext? context}) async {
-    NumberFormat currency = getNumberFormat();
     if (context != null) {
       Transaction transaction = await getTransaction(id);
       SnackBar snackBar = SnackBar(
         content: Text(
-          '${translateText("Deleted")} ${currency.format(transaction.amount)} ${translateText("transaction")}',
+          '${translateText("Deleted")} ${formatAmount(transaction.amount)} ${translateText("transaction")}',
         ),
         action: SnackBarAction(
           label: translateText('Undo').capitalizeFirstofEach,

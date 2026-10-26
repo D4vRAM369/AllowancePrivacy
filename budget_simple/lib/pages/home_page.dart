@@ -252,7 +252,6 @@ class HomePageState extends State<HomePage> {
                   stream:
                       database.totalSpendAfterDay(snapshot.data!.dateCreated),
                   builder: (context, snapshotTotalSpent) {
-                    NumberFormat currency = getNumberFormat();
                     double amount =
                         snapshot.data!.amount - (snapshotTotalSpent.data ?? 0);
                     int moreDays = (snapshot.data!.dateCreatedUntil
@@ -336,8 +335,7 @@ class HomePageState extends State<HomePage> {
                                     key: ValueKey(snapshotTotalSpent.data),
                                     height: 67,
                                     child: TextFont(
-                                      text: currency
-                                          .format(amount < 0 ? 0 : amount),
+                                      text: formatAmount(amount < 0 ? 0 : amount),
                                       fontSize: 55,
                                       fontWeight: FontWeight.bold,
                                       autoSizeText: true,
@@ -357,7 +355,7 @@ class HomePageState extends State<HomePage> {
                                       ? TextFont(
                                           key: ValueKey(amount),
                                           text:
-                                              "${currency.format(amount.abs())} ${translateText("overspent")}",
+                                              "${formatAmount(amount.abs())} ${translateText("overspent")}",
                                           textColor: Theme.of(context)
                                               .colorScheme
                                               .error,
@@ -368,7 +366,7 @@ class HomePageState extends State<HomePage> {
                                       : TextFont(
                                           key: ValueKey(amount),
                                           text:
-                                              "${currency.format(amount.abs() / moreDays)}/${translateText("day")} ${translateText("for")} $moreDays ${translateText("more")} ${moreDays == 1 ? translateText("day") : translateText("days")}",
+                                              "${formatAmount(amount.abs() / moreDays)}/${translateText("day")} ${translateText("for")} $moreDays ${translateText("more")} ${moreDays == 1 ? translateText("day") : translateText("days")}",
                                           fontSize: 17,
                                           maxLines: 3,
                                           textAlign: TextAlign.center,

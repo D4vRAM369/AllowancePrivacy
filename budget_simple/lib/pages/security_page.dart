@@ -72,6 +72,19 @@ class _SecurityPageState extends State<SecurityPage> {
       appBar: AppBar(title: const Text('Privacidad y seguridad')),
       body: ListView(children: [
         SwitchListTile(
+          secondary: const Icon(Icons.visibility_off_outlined),
+          title: const Text('Ocultar importes'),
+          subtitle: const Text(
+              'Muestra •••• en lugar de cantidades al abrir o volver a la app. El ojo de la pantalla principal las enseña un momento.'),
+          value: sharedPreferences.getBool(hideAmountsKey) ?? false,
+          onChanged: (value) async {
+            await sharedPreferences.setBool(hideAmountsKey, value);
+            amountsHidden.value = value;
+            if (mounted) setState(() {});
+          },
+        ),
+        const Divider(),
+        SwitchListTile(
           title: const Text('Bloqueo con PIN'),
           subtitle: const Text(
               'Pide el PIN antes de mostrar tus datos. Si lo olvidas no hay forma de recuperarlo: solo tus copias de seguridad.'),

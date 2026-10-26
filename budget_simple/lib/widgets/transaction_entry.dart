@@ -13,7 +13,6 @@ class TransactionEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double maxWidth = 450;
-    NumberFormat currency = getNumberFormat();
     return Tappable(
       onTap: () async {
         String? result = await showDialog<String>(
@@ -33,8 +32,7 @@ class TransactionEntry extends StatelessWidget {
                     maxLines: 2,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    text: currency
-                        .format(removeNegativeZero(transaction.amount * -1)),
+                    text: formatAmount(removeNegativeZero(transaction.amount * -1)),
                     textColor: getTransactionAmountColor(
                         context, transaction.amount * -1),
                   ),
@@ -133,7 +131,7 @@ class TransactionEntry extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         TextFont(
-                          text: currency.format(
+                          text: formatAmount(
                               removeNegativeZero(transaction.amount * -1)),
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -173,7 +171,7 @@ class TransactionEntry extends StatelessWidget {
   }
 }
 
-double? removeNegativeZero(double number) {
+double removeNegativeZero(double number) {
   if (number.abs() == 0) {
     return 0;
   }
