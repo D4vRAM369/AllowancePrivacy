@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108">
+<!-- Keep essential shapes inside the adaptive icon safe area. -->
+<rect width="108" height="108" fill="#101A2A"/>
+<g id="foreground" transform="translate(8.1 8.1) scale(0.85)">
+<rect x="28" y="22" width="43" height="62" rx="7" fill="#273C56"/>
+<rect x="34" y="29" width="31" height="13" rx="2" fill="#96DCC1"/>
+<path d="M35 49h8v8h-8z M48 49h8v8h-8z M61 49h4v8h-4z M35 62h8v8h-8z M48 62h8v8h-8z M35 75h21v4H35z" fill="#96DCC1"/>
+<path d="M70 49L86 55V68Q85 80 70 87Q55 80 54 68V55Z" fill="#96DCC1" stroke="#101A2A" stroke-width="3"/>
+<path d="M65 65V61a5 5 0 0 1 10 0v4" fill="none" stroke="#101A2A" stroke-width="3"/>
+<rect x="62" y="64" width="16" height="13" rx="2" fill="#101A2A"/>
+<path d="M70 68v5" stroke="#96DCC1" stroke-width="2"/>
+</g></svg>

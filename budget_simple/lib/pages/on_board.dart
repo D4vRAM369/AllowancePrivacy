@@ -93,7 +93,7 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                 maxLines: 5,
               ),
               const TextFont(
-                text: "Allowance",
+                text: "Allowance Privacy",
                 fontWeight: FontWeight.bold,
                 fontSize: 35,
                 textAlign: TextAlign.center,

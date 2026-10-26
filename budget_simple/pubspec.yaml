@@ -1,11 +1,11 @@
 name: budget_simple
-description: A simple budget app.
+description: Allowance Privacy, an independent Android fork of Allowance.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.5.1+20
+version: 0.1.0+1
 
 environment:
-  sdk: '>=2.19.0-444.0.dev <3.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:

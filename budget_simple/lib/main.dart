@@ -63,7 +63,8 @@ void main() async {
   dataSetTranslationsApp = await openAppTranslations();
   runApp(
     DevicePreview(
-      enabled: kDebugMode,
+      // Native debug builds should use the actual device screen.
+      enabled: kDebugMode && kIsWeb,
       builder: (context) => InitializeApp(key: initializeAppStateKey),
     ),
   );
@@ -146,7 +147,7 @@ class App extends StatelessWidget {
         return child ?? const SizedBox.shrink();
       },
       themeAnimationDuration: const Duration(milliseconds: 1000),
-      title: 'Allowance',
+      title: 'Allowance Privacy',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: themeColor ?? systemTheme,
