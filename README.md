@@ -2,6 +2,8 @@
 
 <h1 align="center">Allowance Privacy</h1>
 
+<p align="center"><b>Español</b> · <a href="README-EN.md">English</a></p>
+
 Fork Android de [Allowance](https://github.com/jameskokoska/Allowance) centrado en proteger tu información financiera. Se instala junto a la app original (`dev.d4vram.allowanceenhanced`) y conserva todas sus funciones de presupuesto. Origen, cambios y licencia: [FORK_NOTICE.md](FORK_NOTICE.md) (GPL-3.0).
 
 **Fork creado y mantenido por [D4vRAM369](https://github.com/D4vRAM369)**, sobre el trabajo original de [James Kokoska](https://github.com/jameskokoska) y colaboradores de Allowance. Contacto: [d4vram369@proton.me](mailto:d4vram369@proton.me) · [Telegram](https://t.me/D4vRAM369).
@@ -9,6 +11,10 @@ Fork Android de [Allowance](https://github.com/jameskokoska/Allowance) centrado 
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=D4vRAM369&button_colour=5F7FFF&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/D4vRAM369)
 
 Si te gusta la base, apoya también al autor original: [ko-fi.com/dapperappdeveloper](https://ko-fi.com/dapperappdeveloper).
+
+## Descargar
+
+APK firmado en [Releases](https://github.com/D4vRAM369/AllowancePrivacy/releases). Cada versión incluye las huellas SHA-256 del certificado y del APK para verificarlas.
 
 ## Qué añade
 
