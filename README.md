@@ -1,4 +1,6 @@
-# Allowance Privacy
+<p align="center"><img src="assets/branding/logo-256.png" width="128" alt="Allowance Privacy icon"></p>
+
+<h1 align="center">Allowance Privacy</h1>
 
 Fork Android de [Allowance](https://github.com/jameskokoska/Allowance) centrado en proteger tu información financiera. Se instala junto a la app original (`dev.d4vram.allowanceenhanced`) y conserva todas sus funciones de presupuesto. Origen, cambios y licencia: [FORK_NOTICE.md](FORK_NOTICE.md) (GPL-3.0).
 
@@ -17,7 +19,7 @@ Si te gusta la base, apoya también al autor original: [ko-fi.com/dapperappdevel
 - **Tus datos, en tus archivos:** CSV de movimientos, backup completo cifrado con contraseña (AES-256-GCM + Argon2id) y AutoBackup cifrado a la carpeta que elijas. Excluido del backup en la nube de Android.
 - **Editar descripciones** de movimientos sin tocar importes ni fechas.
 
-Todo está en Ajustes → *Privacidad y seguridad* y *Copias y datos*.
+Todo está en Ajustes → *Privacidad y seguridad* y *Copias y datos*. Política de privacidad: [PRIVACY.md](PRIVACY.md).
 
 ## Límites conocidos
 

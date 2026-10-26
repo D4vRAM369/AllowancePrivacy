@@ -260,8 +260,8 @@ class AboutPage extends StatelessWidget {
               const AboutInfoBox(
                 title: "Privacy Policy",
                 link:
-                    "https://docs.google.com/document/d/11aLF5yTi7oGAc0p69tcA2I3d0whQEThRsYTr1Q1Fz6M/edit?pli=1#heading=h.sqyldmridf41",
-                displayLink: "https://docs.google.com/...",
+                    "https://github.com/D4vRAM369/AllowancePrivacy/blob/main/PRIVACY.md",
+                displayLink: "Sin red ni recogida de datos · No network, no data collected",
               ),
               const AboutInfoBox(
                 title: "Contact",
