@@ -1,3 +1,5 @@
+import 'package:budget_simple/backup/backup_service.dart';
+import 'package:budget_simple/backup/backup_platform.dart';
 import 'dart:ui';
 
 import 'package:budget_simple/pages/main_page_layout.dart';
@@ -223,4 +225,27 @@ class ScrollBehavior extends MaterialScrollBehavior {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
       };
+}
+
+/// Separate entry point: no onboarding, notifications, or financial screen.
+@pragma('vm:entry-point')
+Future<void> backupBackgroundMain() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  TransactionsDatabase? db;
+  var success = false;
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    db = constructDb('db');
+    await BackupService(db, prefs).runAutomatic();
+    success = true;
+  } catch (_) {
+    // Only generic status crosses the platform boundary; never financial logs.
+  } finally {
+    try {
+      await db?.close();
+    } finally {
+      await BackupPlatform.channel.invokeMethod<void>(
+          'backgroundFinished', {'success': success});
+    }
+  }
 }

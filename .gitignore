@@ -1,1 +1,7 @@
 .omx/
+
+# Personal planning and PBL documentation (user request)
+/docs/
+/ROADMAP.md
+/SPEC.md
+/HANDOFF.md

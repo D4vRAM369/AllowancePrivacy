@@ -1,3 +1,4 @@
+import 'package:budget_simple/pages/backup_page.dart';
 import 'dart:io';
 
 import 'package:budget_simple/database/tables.dart';
@@ -85,6 +86,13 @@ class AboutPage extends StatelessWidget {
                 onTap: () {
                   openUrl("https://github.com/jameskokoska/Budget-Simple");
                 },
+              ),
+              if (!kIsWeb && Platform.isAndroid) ListTile(
+                leading: const Icon(Icons.backup_outlined),
+                title: const Text('Copias y datos'),
+                subtitle: const Text('CSV, backup y AutoBackup cifrado'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+                  builder: (_) => const BackupPage())),
               ),
               const Divider(),
               Center(
