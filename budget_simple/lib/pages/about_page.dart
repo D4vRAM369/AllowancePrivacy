@@ -14,7 +14,6 @@ import 'package:budget_simple/struct/translations.dart';
 import 'package:budget_simple/widgets/page_framework.dart';
 import 'package:budget_simple/widgets/select_color.dart';
 import 'package:budget_simple/widgets/settings_container.dart';
-import 'package:budget_simple/widgets/support_developer.dart';
 import 'package:budget_simple/widgets/tappable.dart';
 import 'package:budget_simple/widgets/text_font.dart';
 import 'package:budget_simple/widgets/time_digits.dart';
@@ -36,15 +35,6 @@ class AboutPage extends StatelessWidget {
           controller: scrollController,
           child: Column(
             children: [
-              if (Platform.isIOS == false) const CashewPromo(),
-              if (Platform.isIOS == false) const SizedBox(height: 5),
-              if (Platform.isIOS == false)
-                const TextFont(
-                  text: "From the same developer!",
-                  fontSize: 15,
-                ),
-              if (Platform.isIOS == false) const SizedBox(height: 10),
-              if (Platform.isIOS == false) const SupportDeveloper(),
               // kIsWeb
               //     ? const SizedBox.shrink()
               //     : SettingsContainer(

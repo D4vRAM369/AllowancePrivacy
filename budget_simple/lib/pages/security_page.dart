@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:budget_simple/security/app_lock.dart';
 import 'package:budget_simple/security/lock_gate.dart';
 import 'package:budget_simple/security/pin_pad.dart';
 import 'package:budget_simple/struct/database_global.dart';
+
+const secureScreenKey = 'secureScreen';
+const hideInRecentsKey = 'hideInRecents';
+
+/// MainActivity reads the same preferences; this re-applies them right away.
+Future<void> applyScreenProtection() => const MethodChannel(
+        'allowance_privacy/screen')
+    .invokeMethod<void>('apply')
+    .catchError((_) {});
 
 class SecurityPage extends StatefulWidget {
   const SecurityPage({super.key});
@@ -65,6 +75,12 @@ class _SecurityPageState extends State<SecurityPage> {
     if (mounted) setState(() {});
   }
 
+  Future<void> _setScreen(String key, bool value) async {
+    await sharedPreferences.setBool(key, value);
+    await applyScreenProtection();
+    if (mounted) setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final enabled = lock.enabled;
@@ -82,6 +98,22 @@ class _SecurityPageState extends State<SecurityPage> {
             amountsHidden.value = value;
             if (mounted) setState(() {});
           },
+        ),
+        SwitchListTile(
+          secondary: const Icon(Icons.screenshot_monitor_outlined),
+          title: const Text('Bloquear capturas de pantalla'),
+          subtitle: const Text(
+              'Impide capturas y grabaciones; la vista de recientes se verá en negro.'),
+          value: sharedPreferences.getBool(secureScreenKey) ?? false,
+          onChanged: (value) => _setScreen(secureScreenKey, value),
+        ),
+        SwitchListTile(
+          secondary: const Icon(Icons.layers_clear_outlined),
+          title: const Text('Ocultar en apps recientes'),
+          subtitle: const Text(
+              'Tapa la miniatura del selector de apps. Android 13 o superior; en versiones anteriores usa «Bloquear capturas».'),
+          value: sharedPreferences.getBool(hideInRecentsKey) ?? true,
+          onChanged: (value) => _setScreen(hideInRecentsKey, value),
         ),
         const Divider(),
         SwitchListTile(

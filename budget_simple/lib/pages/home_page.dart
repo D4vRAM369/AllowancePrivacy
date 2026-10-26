@@ -9,7 +9,6 @@ import 'package:budget_simple/widgets/change_currency_icon.dart';
 import 'package:budget_simple/widgets/home_message.dart';
 import 'package:budget_simple/widgets/increase_limit.dart';
 import 'package:budget_simple/widgets/spending_trajectory.dart';
-import 'package:budget_simple/widgets/support_developer.dart';
 import 'package:budget_simple/widgets/tappable.dart';
 import 'package:budget_simple/widgets/text_font.dart';
 import 'package:budget_simple/widgets/top_header_buttons.dart';
@@ -656,13 +655,6 @@ class HomePageState extends State<HomePage> {
                     getIsFullScreen(context)
                         ? const SizedBox(height: 50)
                         : const TopHeaderButtons(large: false),
-                    numberLogins == 8 ||
-                            numberLogins == 17 ||
-                            numberLogins == 30 ||
-                            numberLogins == 50 ||
-                            numberLogins == 100
-                        ? const CashewPromoPopup()
-                        : const SizedBox.shrink(),
                     const Spacer(),
                     amountRemainingWidget,
                     const Spacer(),

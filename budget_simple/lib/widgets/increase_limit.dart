@@ -95,7 +95,6 @@ class _IncreaseLimitState extends State<IncreaseLimit> {
                       } else if (getDecimalSeparator() == ".") {
                         value = value.replaceAll(",", "");
                       }
-                      print(value);
                       setState(() {
                         selectedAmount = double.tryParse(value) ?? 0;
                       });

@@ -1,5 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="dev.d4vram.allowanceenhanced">
+  <!-- No network in release: no library may add it back. The debug manifest
+       keeps INTERNET for the Flutter tool (hot reload, debugger). -->
+  <uses-permission android:name="android.permission.INTERNET" tools:node="remove"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove"/>
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
   <queries>
     <!-- If your app opens https URLs -->

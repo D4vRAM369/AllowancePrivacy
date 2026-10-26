@@ -19,7 +19,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:budget_simple/database/tables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -31,7 +30,6 @@ firebase deploy
 */
 
 Color systemTheme = Colors.blue;
-final InAppReview inAppReview = InAppReview.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,14 +93,6 @@ setSettings() async {
   sharedPreferences.setInt("numberLogins2", numberLogins + 1);
   hasOnboarded = sharedPreferences.getBool("hasOnboarded") ?? false;
   amountsHidden.value = sharedPreferences.getBool(hideAmountsKey) ?? false;
-  // print(numberLogins);
-  if (!kIsWeb) {
-    if (numberLogins == 6 || numberLogins == 15 || numberLogins == 25) {
-      if (await inAppReview.isAvailable()) {
-        inAppReview.requestReview();
-      }
-    }
-  }
 }
 
 GlobalKey<_InitializeAppState> initializeAppStateKey = GlobalKey();
