@@ -20,7 +20,7 @@ class TransactionEntry extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             title: const TextFont(
-              text: 'Delete Transaction?',
+              text: 'Transaction',
               fontSize: 23,
               maxLines: 3,
             ),
@@ -66,6 +66,10 @@ class TransactionEntry extends StatelessWidget {
                 ),
               ),
               TextButton(
+                onPressed: () => Navigator.pop(context, 'Edit'),
+                child: const Text('Editar descripción'),
+              ),
+              TextButton(
                 onPressed: () => Navigator.pop(context, 'Delete'),
                 child: TextFont(
                   text: 'Delete',
@@ -76,7 +80,15 @@ class TransactionEntry extends StatelessWidget {
             ],
           ),
         );
-        if (result == "Delete") {
+        if (!context.mounted) return;
+        if (result == "Edit") {
+          await showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) =>
+                _EditTransactionNameDialog(transaction: transaction),
+          );
+        } else if (result == "Delete") {
           await database.deleteTransaction(
             transaction.id,
             context: context,
@@ -179,4 +191,95 @@ Color? getTransactionAmountColor(BuildContext context, double amount) {
         : Colors.red[300];
   }
   return null;
+}
+
+class _EditTransactionNameDialog extends StatefulWidget {
+  const _EditTransactionNameDialog({required this.transaction});
+  final Transaction transaction;
+
+  @override
+  State<_EditTransactionNameDialog> createState() =>
+      _EditTransactionNameDialogState();
+}
+
+class _EditTransactionNameDialogState
+    extends State<_EditTransactionNameDialog> {
+  late final TextEditingController controller;
+  bool saving = false;
+  String? error;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(text: widget.transaction.name);
+  }
+
+  @override
+  void dispose() {
+    // The route disposes its fields after its transition, not when Save is tapped.
+    controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> save() async {
+    final name = controller.text;
+    if (name.length > 1000 || name.contains('\u0000')) {
+      setState(() =>
+          error = 'Usa como máximo 1000 caracteres y sin caracteres nulos.');
+      return;
+    }
+    setState(() {
+      saving = true;
+      error = null;
+    });
+    try {
+      final updated =
+          await database.updateTransactionName(widget.transaction.id, name);
+      if (!mounted) return;
+      setState(() => saving = false);
+      if (updated == 0) {
+        setState(() => error = 'El movimiento ya no está disponible.');
+        return;
+      }
+      Navigator.pop(context);
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        saving = false;
+        error = 'No se pudo guardar la descripción. Vuelve a intentarlo.';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: !saving,
+      child: AlertDialog(
+        title: const Text('Editar descripción'),
+        content: SingleChildScrollView(
+          child: TextField(
+            controller: controller,
+            autofocus: true,
+            enabled: !saving,
+            maxLength: 1000,
+            minLines: 1,
+            maxLines: 4,
+            decoration:
+                InputDecoration(labelText: 'Descripción', errorText: error),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: saving ? null : () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: saving ? null : save,
+            child: Text(saving ? 'Guardando…' : 'Guardar'),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -61,6 +61,15 @@ class TransactionsDatabase extends _$TransactionsDatabase {
     return into(transactions).insert(transaction);
   }
 
+  /// Update only the label so editing never recreates a financial movement.
+  Future<int> updateTransactionName(int id, String name) async {
+    if (name.length > 1000 || name.contains('\u0000')) {
+      throw ArgumentError('Descripción no admitida.');
+    }
+    return (update(transactions)..where((row) => row.id.equals(id)))
+        .write(TransactionsCompanion(name: Value(name)));
+  }
+
   Future<Transaction> getTransaction(int id) {
     return (select(transactions)..where((tbl) => tbl.id.equals(id)))
         .getSingle();
