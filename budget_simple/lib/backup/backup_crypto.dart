@@ -98,6 +98,10 @@ class BackupCrypto {
     }
   }
 
+  /// Same Argon2id cost as backups, off the UI thread (used for the app PIN).
+  static Future<Uint8List> deriveInIsolate(String secret, Uint8List salt) =>
+      Isolate.run(() => _derive(secret, salt));
+
   static Future<Uint8List> _derive(String password, Uint8List salt) async {
     final algorithm = Argon2id(
       memory: _memory,

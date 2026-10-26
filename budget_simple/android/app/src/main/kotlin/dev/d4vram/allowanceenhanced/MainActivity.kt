@@ -1,10 +1,11 @@
 package dev.d4vram.allowanceenhanced
 
 import android.content.Intent
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 
-class MainActivity : FlutterActivity() {
+// FragmentActivity is required by local_auth's BiometricPrompt.
+class MainActivity : FlutterFragmentActivity() {
     private var backupBridge: BackupBridge? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {

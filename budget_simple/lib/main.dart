@@ -1,5 +1,7 @@
 import 'package:budget_simple/backup/backup_service.dart';
 import 'package:budget_simple/backup/backup_platform.dart';
+import 'package:budget_simple/security/app_lock.dart';
+import 'package:budget_simple/security/lock_gate.dart';
 import 'dart:ui';
 
 import 'package:budget_simple/pages/main_page_layout.dart';
@@ -146,7 +148,9 @@ class App extends StatelessWidget {
             return Container(color: Colors.transparent);
           };
         }
-        return child ?? const SizedBox.shrink();
+        return LockGate(
+            lock: AppLock(sharedPreferences),
+            child: child ?? const SizedBox.shrink());
       },
       themeAnimationDuration: const Duration(milliseconds: 1000),
       title: 'Allowance Privacy',

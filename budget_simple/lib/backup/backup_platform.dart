@@ -1,17 +1,20 @@
 import 'package:flutter/services.dart';
+import 'package:budget_simple/security/app_lock.dart';
 
 /// Only the Android bridge sees document URIs and protected local keys.
 class BackupPlatform {
   static const channel = MethodChannel('allowance_privacy/backup');
 
   Future<Uint8List?> readDocument() =>
-      channel.invokeMethod<Uint8List>('readDocument');
+      withOwnSheet(() => channel.invokeMethod<Uint8List>('readDocument'));
   Future<bool> writeDocument(String name, String mime, Uint8List bytes) async =>
-      await channel.invokeMethod<bool>(
-          'writeDocument', {'name': name, 'mime': mime, 'bytes': bytes}) ??
+      await withOwnSheet<bool?>(() => channel.invokeMethod<bool>('writeDocument',
+          {'name': name, 'mime': mime, 'bytes': bytes})) ??
       false;
   Future<bool> pickFolder() async =>
-      await channel.invokeMethod<bool>('pickBackupFolder') ?? false;
+      await withOwnSheet<bool?>(
+          () => channel.invokeMethod<bool>('pickBackupFolder')) ??
+      false;
   Future<Map<String, dynamic>> status() async => Map<String, dynamic>.from(
       await channel.invokeMapMethod<String, dynamic>('getAutoBackupStatus') ??
           {});

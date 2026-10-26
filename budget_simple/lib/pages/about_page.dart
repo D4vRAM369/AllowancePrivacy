@@ -1,4 +1,5 @@
 import 'package:budget_simple/pages/backup_page.dart';
+import 'package:budget_simple/pages/security_page.dart';
 import 'dart:io';
 
 import 'package:budget_simple/database/tables.dart';
@@ -86,6 +87,13 @@ class AboutPage extends StatelessWidget {
                 onTap: () {
                   openUrl("https://github.com/jameskokoska/Budget-Simple");
                 },
+              ),
+              if (!kIsWeb && Platform.isAndroid) ListTile(
+                leading: const Icon(Icons.shield_outlined),
+                title: const Text('Privacidad y seguridad'),
+                subtitle: const Text('PIN, huella y bloqueo automático'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
+                  builder: (_) => const SecurityPage())),
               ),
               if (!kIsWeb && Platform.isAndroid) ListTile(
                 leading: const Icon(Icons.backup_outlined),
