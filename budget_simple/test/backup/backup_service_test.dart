@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:drift/native.dart';
@@ -113,4 +114,43 @@ void main() {
     expect(material['key'], everyElement(0));
   });
 
+
+  test('restore notifies the streams the home screen is watching', () async {
+    // Same split read/write connections as lib/database/platform/native.dart.
+    final dir = await Directory.systemTemp.createTemp('restore_stream');
+    final file = File('${dir.path}/db.sqlite');
+    await db.close();
+    db = TransactionsDatabase(MultiExecutor(
+        read: NativeDatabase(file),
+        write: NativeDatabase.createInBackground(file)));
+    await db.into(db.spendingLimit).insert(SpendingLimitCompanion.insert(
+        id: const Value(1),
+        amount: 500,
+        dateCreated: Value(DateTime.utc(2026, 10, 1)),
+        dateCreatedUntil: Value(DateTime.utc(2026, 11, 1))));
+    await db.into(db.transactions).insert(TransactionsCompanion.insert(
+        name: 'prueba',
+        amount: -12.75,
+        dateCreated: Value(DateTime.utc(2026, 10, 2))));
+    service = BackupService(db, prefs);
+    final parsed = await service.parseBackup(await service.createBackup());
+    final totals = <double?>[];
+    final sub = db.totalSpendAfterDay(DateTime.utc(2026, 9, 30)).listen(totals.add);
+    await db.into(db.transactions).insert(TransactionsCompanion.insert(
+        name: 'despues', amount: 5, dateCreated: Value(DateTime.utc(2026, 10, 3))));
+    await pumpEventQueue();
+    expect(totals.last, -7.75);
+    await service.restore(parsed);
+    await pumpEventQueue();
+    expect(totals.last, -12.75);
+    await DataTransfer(db).importCsv([
+      TransferRow(name: 'csv', amount: -1, date: DateTime.utc(2026, 10, 4))
+    ]);
+    await pumpEventQueue();
+    expect(totals.last, -13.75);
+    await sub.cancel();
+    await db.close();
+    db = TransactionsDatabase(NativeDatabase.memory());
+    await dir.delete(recursive: true);
+  });
 }

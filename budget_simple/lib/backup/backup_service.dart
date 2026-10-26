@@ -84,6 +84,7 @@ class BackupService {
         await DataTransfer(db).restore(data);
         await _applyPreferences(data.preferences);
       });
+      DataTransfer(db).notifyChanged();
     } catch (_) {
       await _applyPreferences(previous);
       rethrow;

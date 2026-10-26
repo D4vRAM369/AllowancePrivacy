@@ -5,6 +5,7 @@ import 'package:budget_simple/backup/backup_crypto.dart';
 import 'package:budget_simple/backup/backup_service.dart';
 import 'package:budget_simple/backup/data_transfer.dart';
 import 'package:budget_simple/struct/database_global.dart';
+import 'package:budget_simple/struct/languages_dict.dart';
 
 class BackupPage extends StatefulWidget {
   const BackupPage({super.key});
@@ -225,7 +226,8 @@ class _BackupPageState extends State<BackupPage> {
     }
     await service.restore(data);
     currencyIcon = sharedPreferences.getString('currencyIcon') ?? '\$';
-    language = sharedPreferences.getString('language') ?? 'en';
+    language = sharedPreferences.getString('language') ??
+        (getDeviceLanguage() ?? 'en');
     themeMode = sharedPreferences.getString('themeMode') ?? 'System';
     _success(
         'Copia restaurada. Los ajustes de apariencia se aplicarán completamente al volver a abrir la app.');

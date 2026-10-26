@@ -165,10 +165,17 @@ class DataTransfer {
     });
   }
 
+  /// Split read/write connections (platform/native.dart) miss transaction
+  /// updates, so open screens would keep stale totals until restart.
+  void notifyChanged() => db.notifyUpdates({
+        TableUpdate.onTable(db.transactions),
+        TableUpdate.onTable(db.spendingLimit)
+      });
+
   /// CSV adds movements, skips exact duplicates, and leaves the budget intact.
   Future<int> importCsv(List<TransferRow> rows) async {
     _validateRows(rows);
-    return db.transaction(() async {
+    final added = await db.transaction(() async {
       final existing = await db.select(db.transactions).get();
       final seen = existing
           .map((row) => _rowKey(row.name, row.amount, row.dateCreated))
@@ -184,6 +191,8 @@ class DataTransfer {
       }
       return added;
     });
+    notifyChanged();
+    return added;
   }
 }
 
